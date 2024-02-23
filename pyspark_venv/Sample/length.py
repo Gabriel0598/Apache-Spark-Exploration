@@ -1,6 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.dataframe import DataFrame
-from pyspark.sql.functions import size, col
+from pyspark.sql.functions import size
 
 # Create a SparkSession
 spark = (SparkSession
