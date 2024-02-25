@@ -4,7 +4,7 @@ from pyspark.sql.functions import split, col, year
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
-from delta.tables import *
+from deltalake import DeltaTable
 
 spark = (SparkSession.builder()
                         .master("local[1]")
