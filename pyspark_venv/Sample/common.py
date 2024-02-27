@@ -10,7 +10,7 @@ def create_spark_session(appname: str) -> SparkSession:
 
     spark_session = (
         SparkSession
-            .builder()
+            .builder
                 .master("local[4]")
                     .config(conf=conf)
                         .appName(appname)
