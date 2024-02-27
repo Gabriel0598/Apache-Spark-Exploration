@@ -1,9 +1,12 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
-from common import create_spark_session
+from pyspark_venv.Sample.common import create_spark_session
+
+data_jan_24 = "Data/NYC_LTC/jan_24/*.parquet"
+data_set_23 = "Data/NYC_LTC/set_23/*.parquet"
 
 def analyze_data(spark: SparkSession):
-    data = spark.read.parquet("data/*.parquet").repartition(4)
+    data = spark.read.parquet(data_set_23).repartition(4)
 
     print(f"The data contains: {data.count()} rows")
 
