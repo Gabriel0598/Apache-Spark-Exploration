@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.dataframe import DataFrame
-from pyspark.sql.functions import size, col
+from pyspark.sql.functions import lit, size, col
 
 # Create a SparkSession
 spark = (SparkSession
@@ -10,7 +10,7 @@ spark = (SparkSession
                         .getOrCreate())
 
 # Function to add columns with array items
-def add_item_columns(df: DataFrame, column: str) -> DataFrame:
+def Add_Item_Columns(df: DataFrame, column: str) -> DataFrame:
     """
     Add a new column for each item in the array column.
 
@@ -32,7 +32,23 @@ df = df_source
 # Apply the function to each column
 columns_to_transform = ['col1', 'col2', 'col3', 'etc']
 for column in columns_to_transform:
-    df = add_item_columns(df, column)
+    df = Add_Item_Columns(df, column)
 
 # This new schema should have the new columns
 df.printSchema()
+
+# Get positions from index
+def Index_Item_Columns(df: DataFrame, column: str) -> DataFrame:
+    """
+    Add new columns for each item in the array column and its position index.
+
+    :param df: Source DataFrame
+    :param column: Column with the array
+    :return: DataFrame with new columns
+    """
+    array_size = df.select(size(col(column)).alias("array_size")).rdd.max()["array_size"]
+    for i in range(array_size):
+        df = df.withColumn(f"{column}_item_{i}", col(column).getItem(i))
+        df = df.withColumn(f"position_index_{i}", lit(i))
+    return df
+
