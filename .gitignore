@@ -1,1 +1,3 @@
 pyspark_venv/Sample/connection_sql_server.py
+pyspark_venv/Sample/__pycache__
+.idea
