@@ -7,7 +7,7 @@ from pyspark.sql.functions import *
 from deltalake import DeltaTable
 
 spark = (SparkSession.builder()
-                        .master("local[1]")
+                        .master("local[1]")                                                                                                                                                                                                                                             
                             .config("spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension")
                                 .config("spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog")
                                     .appName("delta pyspark")
